@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finlytics Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!--loads the chart.js library--> 
+</head>
+<body>
+  <!-- HEADER -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <a href="#" class="nav-link" onclick="showSection('entry')">About Us</a>
+    </div>
+    <div class="navbar-center brand"><h2>Finlytics</h2></div>
+    <div class="navbar-right">
+      <a href="#" class="nav-link" onclick="showSection('analytics')">Analytics</a>
+      <a href="#" class="nav-link" onclick="showSection('profile')">Profile</a>
+    </div>
+  </div>
+
+  <!-- ENTRY SECTION -->
+  <div id="entrySection" class="center-section">
+    <div class="card"><h3>Overall Income</h3><input type="number" id="income" placeholder="Enter Income"/></div>
+    <div class="card"><h3>Needy Expenses</h3><input type="number" id="expenses" placeholder="Enter Needy Expenses"/></div>
+    <div class="card"><h3>Extra Expenses</h3><input type="number" id="extra" placeholder="Enter Extra Expenses"/></div>
+    <div class="card"><h3>Savings</h3><input type="number" id="savings" placeholder="Enter Savings"/></div>
+    <div class="card"><h3>Remaining Amount</h3><div id="remaining">₹0</div></div>
+    <div class="card"><button id="saveDataBtn" class="btn-primary">Save</button></div>
+  </div>
+
+  <!-- ANALYTICS SECTION -->
+  <div id="analyticsSection" class="center-section" style="display:none;">
+    <canvas id="monthlyChart" width="300" height="100"></canvas>
+    <br>
+    <button id="nextMonthBtn" class="btn-primary">Add Amount</button>
+    <button id="backBtn" class="btn-secondary">Back</button>
+  </div>
+
+  <!-- PROFILE SECTION -->
+  <div id="profileSection" class="center-section" style="display:none;">
+    <div class="profile-card">
+      <div class="profile-circle" id="profileInitial">J</div>
+      <div class="profile-detail">
+        <p><strong>Name:</strong> <span id="profileName"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+        <p><strong>DOB:</strong> <span id="profileDOB"></span></p>
+        <p><strong>Address:</strong> <span id="profileAddress"></span></p>
+      </div>
+    </div>
+    <button id="profileBackBtn" class="btn-secondary">Back</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
