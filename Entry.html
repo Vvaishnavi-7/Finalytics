@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finlytics Dashboard</title>
+  <link rel="icon" type="image/png" href="finlytics.png">
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+  <!-- Left side -->
+  <div class="navbar-left">
+    <a href="Main.html" class="nav-link">🏠 Home</a>
+  </div>
+
+  <!-- Center -->
+  <div class="navbar-center">
+    <h2>Finlytics</h2>
+  </div>
+
+  <!-- Right side -->
+  <div class="navbar-right">
+    <a href="#" class="nav-link" onclick="showSection('analytics')">Analytics</a>
+    <a href="#" class="nav-link" onclick="showSection('profile')">Profile</a>
+    <a href="#" class="nav-link" onclick="showSection('settings')">⚙ Settings</a>
+  </div>
+</nav>
+
+
+
+  <!-- ENTRY SECTION -->
+  <div id="entrySection" class="center-section">
+    <div class="card"><h3>Overall Income</h3>
+      <input type="number" id="income" placeholder="Enter Income"/>
+    </div>
+    <div class="card"><h3>Needy Expenses</h3>
+      <input type="number" id="expenses" placeholder="Enter Needy Expenses"/>
+    </div>
+    <div class="card"><h3>Extra Expenses</h3>
+      <input type="number" id="extra" placeholder="Enter Extra Expenses"/>
+    </div>
+    <div class="card"><h3>Savings</h3>
+      <input type="number" id="savings" placeholder="Enter Savings"/>
+    </div>
+    <div class="card"><h3>Remaining Amount</h3>
+      <div id="remaining">₹0</div>
+    </div>
+    <div class="card">
+      <button id="saveDataBtn" class="btn-primary">Save</button>
+    </div>
+  </div>
+
+  <!-- ANALYTICS SECTION -->
+  <div id="analyticsSection" class="center-section" style="display:none;">
+    <canvas id="monthlyChart" width="300" height="100"></canvas>
+    <br>
+    <button id="nextMonthBtn" class="btn-primary">Add Amount</button>
+    <button id="backBtn" class="btn-secondary">Back</button>
+  </div>
+
+  <!-- PROFILE SECTION -->
+  <div id="profileSection" class="center-section" style="display:none;">
+    <div class="profile-card">
+      <div class="profile-circle" id="profileInitial">J</div>
+      <div class="profile-detail">
+        <p><h2><strong>Name:</strong> <span id="profileName"></span></h2></p>
+        <p><h2><strong>Email:</strong> <span id="profileEmail"></span></h2></p>
+        <p><h2><strong>DOB:</strong> <span id="profileDOB"></span></h2></p>
+        <p><h2><strong>Address:</strong> <span id="profileAddress"></span></h2></p>
+      </div>
+    </div>
+    <button id="profileBackBtn" class="btn-secondary">Back</button>
+    <button onclick="logout()" class="btn-primary">Logout</button>
+  </div>
+
+  <!-- SETTINGS SECTION -->
+  <div id="settingsSection" class="center-section" style="display:none;">
+    <h2 style="margin-bottom:20px;">⚙️ Settings</h2>
+    <div class="settings-grid">
+
+      <!-- Theme Toggle -->
+      <div class="settings-card">
+        <h3>Theme</h3>
+        <label class="switch">
+          <input type="checkbox" id="themeToggle">
+          <span class="slider round"></span>
+        </label>
+        <p>Switch between Light & Dark mode.</p>
+      </div>
+      <div class="settings-card">
+  <h3>Security</h3>
+  <p>Update password and enable 2FA.</p>
+  <button class="btn btn-outline-danger">Manage Security</button>
+</div>
+
+
+      <!-- Currency Selector -->
+      <div class="settings-card">
+        <h3>Currency</h3>
+        <select id="currencySelector" class="styled-select">
+          <option value="₹">₹ INR</option>
+          <option value="$">$ USD</option>
+          <option value="€">€ EUR</option>
+          <option value="£">£ GBP</option>
+        </select>
+        <p>Select your preferred currency.</p>
+      </div>
+
+      <!-- Notifications -->
+      <div class="settings-card">
+        <h3>Notifications</h3>
+        <label class="switch">
+          <input type="checkbox" id="notifToggle">
+          <span class="slider round"></span>
+        </label>
+        <p>Enable or disable reminders.</p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="settings-footer">
+      <p>© 2025 <strong>Finlytics</strong> | All Rights Reserved</p>
+    </footer>
+
+    <button id="settingsBackBtn" class="btn-secondary">⬅ Back</button>
+  </div>
+<div class="summary-cards">
+  <div class="card kpi">
+    <h4>Total Income</h4>
+    <p id="totalIncome">₹0</p>
+  </div>
+  <div class="card kpi">
+    <h4>Total Expenses</h4>
+    <p id="totalExpenses">₹0</p>
+  </div>
+  <div class="card kpi">
+    <h4>Savings</h4>
+    <p id="totalSavings">₹0</p>
+  </div>
+  <div class="card kpi">
+    <h4>Balance</h4>
+    <p id="totalBalance">₹0</p>
+  </div>
+</div>
+<!-- Summary Cards -->
+<div class="summary-cards">
+  <div class="card shadow p-4">
+    <h4>Total Income</h4>
+    <p id="totalIncome">₹0</p>
+  </div>
+  <div class="card shadow p-4">
+    <h4>Total Expenses</h4>
+    <p id="totalExpenses">₹0</p>
+  </div>
+  <div class="card shadow p-4">
+    <h4>Savings</h4>
+    <p id="totalSavings">₹0</p>
+  </div>
+  <div class="card shadow p-4">
+    <h4>Remaining Balance</h4>
+    <p id="totalBalance">₹0</p>
+  </div>
+</div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>
